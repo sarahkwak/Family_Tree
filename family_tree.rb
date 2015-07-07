@@ -18,6 +18,26 @@ module Tree
       @parent.nil?
     end
 
+    def parent=(parent)
+      @parent = parent
+    end
+
+    def parentage
+      return nil if is_root?
+      parent_array = []
+      grand_parent = self.parent
+      parent_array
+    end
+
+    def <<(child)
+      add(child)
+    end
+
+    def add(child)
+      child.parent =self
+      @children.push(child)
+    end
+
   end #class ends
 
 end #module ends

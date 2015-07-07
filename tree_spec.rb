@@ -50,12 +50,27 @@ RSpec.describe Tree do
     it "should return people's name with no siblings" do
      expect(no_siblings_name(nancy).count).to eq(3)
    end
-    it "should be leaf nodes included in this list" do
+    it "should include leaf node" do
       expect(no_siblings_name(nancy)).to include(mary)
     end
-    it "root node always be included in this list" do
+    it "should include root node in this list" do
       expect(no_siblings_name(nancy)).to include(nancy)
     end
   end #describe for no siblings
+
+  describe '#no_children_name' do
+    it 'should return people without children' do
+      expect(no_children_name(nancy).count).to eq(8)
+    end
+    it 'should NOT include root node' do
+      expect(no_children_name(nancy)).not_to include(nancy)
+    end
+    it 'should include leaf node' do
+      expect(no_children_name(nancy)).to include(adam)
+    end
+    it 'all people in this list has no children' do
+      expect(no_children_name(nancy)[0].children.count).to eq(0)
+    end
+  end
 
 end #rspec

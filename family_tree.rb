@@ -120,12 +120,50 @@ def no_siblings(node, result=[])
   return result
 end
 
+# No Children function
 def no_siblings_name(node)
   result = no_siblings(node)
   result.each { |ind| p ind.name }
+end
+
+def no_children(node, result=[])
+  if node.is_root?
+    result
+  end
+  if node.children.size == 0
+    result << node
+  elsif node.is_leaf?
+    result << node
+  elsif node.children.size == 1
+    result
+  end
+  node.children.each do |child|
+    no_children(child, result)
+  end
+  return result
+end
+
+def no_children_name(node)
+  result = no_children(node)
+  result.each { |person| p person.name }
+end
+
+def search(node, name)
+  if node.name == name
+    return node
+  end
+  node.children.each do |child|
+    result = search(child, name)
+    if result != nil
+      return result
+    end
+  end
+  return nil
 end
 
 # Drive Test goes here
 # p jill.grand_parent_name
 # no_siblings_name(nancy)
 # nancy.grand_parent_name
+# no_children_name(nancy)
+# no_children(nancy)

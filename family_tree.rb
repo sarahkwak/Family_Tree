@@ -67,6 +67,17 @@ module Tree
       end
       grand_children
     end
+
+    def grand_children
+      grand_children = []
+      @children.each do |child|
+        child.children.each do |g_child|
+          grand_children << g_child
+        end
+      end
+      grand_children
+    end
+
   end #class ends
 
 end #module ends
@@ -104,7 +115,7 @@ george.add(patrick)
 george.add(robert)
 james.add(mary)
 
-# No Sibling function
+# No Sibling function (will return node)
 def no_siblings(node, result=[])
   if node.is_root?
     result<<node
@@ -119,13 +130,13 @@ def no_siblings(node, result=[])
   end
   return result
 end
-
-# No Children function
+# No Sibling function (will return name)
 def no_siblings_name(node)
   result = no_siblings(node)
   result.each { |ind| p ind.name }
 end
 
+# No Children function (will return node)
 def no_children(node, result=[])
   if node.is_root?
     result
@@ -143,11 +154,13 @@ def no_children(node, result=[])
   return result
 end
 
+# No Children function (will return name)
 def no_children_name(node)
   result = no_children(node)
   result.each { |person| p person.name }
 end
 
+# General Tree seach function
 def search(node, name)
   if node.name == name
     return node
@@ -161,9 +174,32 @@ def search(node, name)
   return nil
 end
 
+# Largest Grand Children function (will return node)
+def largest_grand_child(node, winner= nil)
+  if node.is_root?
+    winner = node
+  end
+  if !node.is_leaf?
+    if node.grand_children.size > winner.grand_children.size
+      winner = node
+    end
+    node.children.each do |child|
+      winner = largest_grand_child(child, winner)
+    end
+  end
+  return winner
+end
+
+#  Largest Grand Children function (will return name)
+def largest_grand_child_name(node)
+  result = largest_grand_child(node)
+  p result.name
+end
 # Drive Test goes here
 # p jill.grand_parent_name
 # no_siblings_name(nancy)
 # nancy.grand_parent_name
 # no_children_name(nancy)
 # no_children(nancy)
+# largest_grand_child_name(kevin)
+# p jill.grand_children.count

@@ -31,45 +31,61 @@ RSpec.describe Tree do
     george.add(patrick)
     george.add(robert)
     james.add(mary)
+
   describe '#grand_parent_name' do
     it "should have at least one argument" do
-      expect(grand_parent_name).to raise_error
+      expect{ grand_parent_name }.to raise_error
     end
     it "returns grand parent's name" do
       expect(patrick.grand_parent_name).to eq("Kevin")
     end
     it "should raise argument error if there is no grandparent" do
-      expect(jill.grand_parent_name).to raise_error(ArgumentError)
+      expect{ jill.grand_parent_name }.to raise_error(ArgumentError)
     end
     it "should raise argument error if the instance is root object" do
-      expect(nancy.grand_parent_name).to raise_error(ArgumentError)
+      expect{ nancy.grand_parent_name }.to raise_error(ArgumentError)
     end
   end #describe for grand parent
 
-  describe '#no_siblings_name' do
+  describe '#no_siblings' do
     it "should return people's name with no siblings" do
-     expect(no_siblings_name(nancy).count).to eq(3)
+     expect(no_siblings(nancy).count).to eq(3)
    end
     it "should include leaf node" do
-      expect(no_siblings_name(nancy)).to include(mary)
+      expect(no_siblings(nancy)).to include(mary)
     end
     it "should include root node in this list" do
-      expect(no_siblings_name(nancy)).to include(nancy)
+      expect(no_siblings(nancy)).to include(nancy)
     end
   end #describe for no siblings
 
   describe '#no_children_name' do
     it 'should return people without children' do
-      expect(no_children_name(nancy).count).to eq(8)
+      expect(no_children(nancy).count).to eq(8)
     end
     it 'should NOT include root node' do
-      expect(no_children_name(nancy)).not_to include(nancy)
+      expect(no_children(nancy)).not_to include(nancy)
     end
     it 'should include leaf node' do
-      expect(no_children_name(nancy)).to include(adam)
+      expect(no_children(nancy)).to include(adam)
     end
     it 'all people in this list has no children' do
-      expect(no_children_name(nancy)[0].children.count).to eq(0)
+      expect(no_children(nancy)[0].children.count).to eq(0)
+    end
+  end
+
+  describe '#largest_grand_child' do
+    it 'should raise error when the argument is not a root node' do
+      expect{largest_grand_child(kevin)}.to raise_error(NoMethodError)
+    end
+    it 'should return person with most grandchildren' do
+      expect(largest_grand_child(nancy)).to eq(jill)
+    end
+    it 'this person will have 4 grandchildren' do
+      expect(largest_grand_child(nancy).grand_children.count).to eq(4)
+    end
+    it 'leaf node should never be in this list' do
+      expect(largest_grand_child(nancy)).not_to eq(adam)
     end
   end
 

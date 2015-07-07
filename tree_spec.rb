@@ -110,4 +110,13 @@ RSpec.describe Tree do
     end
   end #describe is_leaf
 
+  describe '#is_root?' do
+    it 'checks if the node is the root node' do
+      expect(nancy.is_root?).to be(true)
+    end
+    it 'confirms that the node does not have any parent' do
+      expect(nancy.parent).to eq(nil)
+    end
+  end #describe is_root
+
 end #rspec

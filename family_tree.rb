@@ -18,10 +18,6 @@ module Tree
       @parent == nil
     end
 
-    def is_root?
-      @parent.nil?
-    end
-
     def parent=(parent)
       @parent = parent
     end
@@ -218,4 +214,4 @@ end
 # p nancy.is_root?
 # joseph.siblings
 # p george.siblings
-p nancy.siblings
+# p nancy.parent

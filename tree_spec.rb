@@ -101,4 +101,13 @@ RSpec.describe Tree do
     end
   end #describe siblings
 
+  describe '#is_leaf?' do
+    it 'checks if the node has any child' do
+      expect(adam.is_leaf?).to be(true)
+    end
+    it 'checks if the node has any child' do
+      expect(nancy.is_leaf?).to be(false)
+    end
+  end #describe is_leaf
+
 end #rspec

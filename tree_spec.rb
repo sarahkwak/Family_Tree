@@ -72,7 +72,7 @@ RSpec.describe Tree do
     it 'all people in this list has no children' do
       expect(no_children(nancy)[0].children.count).to eq(0)
     end
-  end
+  end #describe no children
 
   describe '#largest_grand_child' do
     it 'should raise error when the argument is not a root node' do
@@ -87,6 +87,18 @@ RSpec.describe Tree do
     it 'leaf node should never be in this list' do
       expect(largest_grand_child(nancy)).not_to eq(adam)
     end
-  end
+  end #describe largest grand child
+
+  describe '#siblings' do
+    it 'root node does not have any sibling' do
+      expect(nancy.siblings).to eq(0)
+    end
+    it 'should return names of the siblings' do
+      expect(george.siblings.count).to eq(3)
+    end
+    it 'should return "Only Child" if there is no sibling' do
+      expect(kevin.siblings).to eq("Only Child")
+    end
+  end #describe siblings
 
 end #rspec

@@ -15,6 +15,10 @@ module Tree
     end
 
     def is_root?
+      @parent == nil
+    end
+
+    def is_root?
       @parent.nil?
     end
 
@@ -39,23 +43,30 @@ module Tree
     end
 
     def grand_parent_name
-      raise ArgumentError, 'There is no Grand Parent' if self.parent === nil or self.parent.parent == nil
+      raise ArgumentError, 'There is no Grand Parent' if self.parent == nil or self.parent.parent == nil
       return parent.parent.name
     end
 
     def siblings
-      if @parent.child.size === 0
+      sibling = []
+      if is_root?
         return 0
       end
-      @parent.child.each { |each_child| p each_child.name }
+      if @parent.children.size == 1
+        return "Only Child"
+      end
+      @parent.children.each do |child|
+        if child.name == self.name
+          nil
+        else
+          sibling << child.name
+        end
+      end
+      return sibling
     end
 
     def is_leaf?
       @children.size == 0
-    end
-
-    def is_root?
-      @parent == nil
     end
 
     def grand_children
@@ -200,6 +211,11 @@ end
 # no_siblings_name(nancy)
 # nancy.grand_parent_name
 # no_children_name(nancy)
-# no_children(nancy)
+# no_children_name(nancy)
 # largest_grand_child_name(kevin)
 # p jill.grand_children.count
+# robert.parent.children.each { |child| p child.name}
+# p nancy.is_root?
+# joseph.siblings
+# p george.siblings
+p nancy.siblings

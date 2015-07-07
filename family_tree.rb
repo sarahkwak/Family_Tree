@@ -70,3 +70,40 @@ module Tree
   end #class ends
 
 end #module ends
+
+
+# creating family member objects
+nancy = Tree::Family.new("Nancy")
+adam = Tree::Family.new("Adam")
+jill = Tree::Family.new("Jill")
+carl = Tree::Family.new("Carl")
+kevin = Tree::Family.new("Kevin")
+catherine = Tree::Family.new("Catherine")
+joseph = Tree::Family.new("Joseph")
+samuel = Tree::Family.new("Samuel")
+george = Tree::Family.new("George")
+james = Tree::Family.new("James")
+aaron = Tree::Family.new("Aaron")
+patrick = Tree::Family.new("Patrick")
+robert = Tree::Family.new("Robert")
+mary = Tree::Family.new("Mary")
+
+# build relationship
+
+nancy.add(adam)
+nancy.add(jill)
+nancy.add(carl)
+jill.add(kevin)
+carl.add(catherine)
+carl.add(joseph)
+kevin.add(samuel)
+kevin.add(george)
+kevin.add(james)
+kevin.add(aaron)
+george.add(patrick)
+george.add(robert)
+james.add(mary)
+
+
+# Drive Test goes here
+# p jill.grand_parent_name

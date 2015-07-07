@@ -8,11 +8,11 @@ module Tree
       @children = []
     end
 
-    def root
-      root = self
-      root = root.parent while !root.is_root?
-      root
-    end
+    # def root
+    #   root = self
+    #   root = root.parent while !root.is_root?
+    #   root
+    # end
 
     def is_root?
       @parent == nil
@@ -215,3 +215,4 @@ end
 # joseph.siblings
 # p george.siblings
 # p nancy.parent
+# p patrick

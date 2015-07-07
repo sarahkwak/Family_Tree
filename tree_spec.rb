@@ -119,4 +119,13 @@ RSpec.describe Tree do
     end
   end #describe is_root
 
+  describe '#parentage' do
+    it 'should return nil if argument is root node' do
+      expect(nancy.parentage).to eq(nil)
+    end
+    it 'creates parent and child relationship' do
+      expect(patrick.parent.name).to eq("George")
+    end
+  end #describe parentage
+
 end #rspec

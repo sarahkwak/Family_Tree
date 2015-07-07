@@ -104,6 +104,28 @@ george.add(patrick)
 george.add(robert)
 james.add(mary)
 
+# No Sibling function
+def no_siblings(node, result=[])
+  if node.is_root?
+    result<<node
+  end
+  if node.children.size == 1
+    result<<node.children[0]
+  elsif node.is_leaf?
+    return result
+  end
+  node.children.each do |child|
+    no_siblings(child, result)
+  end
+  return result
+end
+
+def no_siblings_name(node)
+  result = no_siblings(node)
+  result.each { |ind| p ind.name }
+end
 
 # Drive Test goes here
 # p jill.grand_parent_name
+# no_siblings_name(nancy)
+# nancy.grand_parent_name

@@ -33,7 +33,7 @@ RSpec.describe Tree do
     james.add(mary)
   describe '#grand_parent_name' do
     it "should have at least one argument" do
-      expect(grand_parent_name).to raise_error(NameError)
+      expect(grand_parent_name).to raise_error
     end
     it "returns grand parent's name" do
       expect(patrick.grand_parent_name).to eq("Kevin")
@@ -44,6 +44,18 @@ RSpec.describe Tree do
     it "should raise argument error if the instance is root object" do
       expect(nancy.grand_parent_name).to raise_error(ArgumentError)
     end
-  end
+  end #describe for grand parent
 
-end
+  describe '#no_siblings_name' do
+    it "should return people's name with no siblings" do
+     expect(no_siblings_name(nancy).count).to eq(3)
+   end
+    it "should be leaf nodes included in this list" do
+      expect(no_siblings_name(nancy)).to include(mary)
+    end
+    it "root node always be included in this list" do
+      expect(no_siblings_name(nancy)).to include(nancy)
+    end
+  end #describe for no siblings
+
+end #rspec

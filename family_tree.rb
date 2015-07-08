@@ -208,4 +208,5 @@ end
 # p george.siblings
 # p nancy.parent
 # p patrick
-patrick.grand_children.each {|child| p child.name }
+# patrick.grand_children.each {|child| p child.name }
+p search(nancy, "Patrick")

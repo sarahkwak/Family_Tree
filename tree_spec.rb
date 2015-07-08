@@ -167,5 +167,14 @@ RSpec.describe Tree do
     end
   end #describe is_leaf
 
+  describe '#search' do
+    it 'should return node object, when attribute name passed' do
+      expect(search(nancy, "Patrick")).to eq(patrick)
+    end
+    it 'if the first argument is not the root node, it may not find the object' do
+      expect(search(patrick, "Kevin")).to eq(nil)
+    end
+  end #describe search
+
 
 end #rspec

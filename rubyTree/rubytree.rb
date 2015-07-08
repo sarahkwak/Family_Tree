@@ -87,3 +87,5 @@ def largest_grand_child
      largest_children= largest_sibling.parent
      p largest_children.parent.name
 end
+
+root_node.print_tree

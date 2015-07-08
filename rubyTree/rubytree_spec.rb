@@ -31,4 +31,10 @@ RSpec.describe Tree do
     end
   end #describe no children
 
+  describe 'largest_grand_child' do
+    it 'returns a person with largest number of grandchildren' do
+      expect(largest_grand_child).to eq("Jill")
+    end
+  end #describe largest grand child
+
 end

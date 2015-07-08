@@ -74,3 +74,16 @@ def no_children
   end
   no_child.each { |individual| p individual.name }
 end
+
+def largest_grand_child
+  i = 1
+  largest_sibling = FAMILY[0]
+  while i < FAMILY.size
+    if FAMILY[i].siblings.count > largest_sibling.siblings.count
+      largest_sibling = FAMILY[i]
+    end
+      i+=1
+  end
+     largest_children= largest_sibling.parent
+     p largest_children.parent.name
+end

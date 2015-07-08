@@ -16,4 +16,10 @@ RSpec.describe Tree do
     end
   end #describe grandparent
 
+  describe 'no_siblings_name' do
+    it 'returns name of people without sibilings' do
+      expect(no_siblings_name.count).to eq(3)
+    end
+  end #describe no siblings
+
 end

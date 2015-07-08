@@ -50,3 +50,15 @@ root_node.each { |node| FAMILY << node }
 def grandparent(child)
   child.parent.parent.name
 end
+
+def no_siblings_name
+  only_child = []
+  i = 0
+  while i < FAMILY.size
+    if FAMILY[i].siblings == []
+      only_child << FAMILY[i]
+    end
+    i+=1
+  end
+    only_child.each { |individual| p individual.name }
+end

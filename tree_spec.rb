@@ -49,6 +49,24 @@ RSpec.describe Tree do
     end
   end #describe initialize
 
+  describe '#is_root?' do
+    it 'checks if the node is the root node' do
+      expect(nancy.is_root?).to be(true)
+    end
+    it 'confirms that the node does not have any parent' do
+      expect(nancy.parent).to eq(nil)
+    end
+  end #describe is_root
+
+   describe '#parentage' do
+    it 'should return nil if argument is root node' do
+      expect(nancy.parentage).to eq(nil)
+    end
+    it 'creates parent and child relationship' do
+      expect(patrick.parent.name).to eq("George")
+    end
+  end #describe parentage
+
   describe '#add' do
     it 'should raise error if no argument passed' do
       expect{carl.add}.to raise_error(ArgumentError)
@@ -88,6 +106,15 @@ RSpec.describe Tree do
       expect(no_siblings(nancy)).to include(nancy)
     end
   end #describe for no siblings
+
+  describe '#grand_children' do
+    it 'should return grand children of the node' do
+      expect(nancy.grand_children.size).to eq(3)
+    end
+    it "shouldn't return anything if node has no grandchild" do
+      expect(patrick.grand_children.size).to eq(0)
+    end
+  end #describe grand children
 
   describe '#no_children_name' do
     it 'should return people without children' do
@@ -140,22 +167,5 @@ RSpec.describe Tree do
     end
   end #describe is_leaf
 
-  describe '#is_root?' do
-    it 'checks if the node is the root node' do
-      expect(nancy.is_root?).to be(true)
-    end
-    it 'confirms that the node does not have any parent' do
-      expect(nancy.parent).to eq(nil)
-    end
-  end #describe is_root
-
-  describe '#parentage' do
-    it 'should return nil if argument is root node' do
-      expect(nancy.parentage).to eq(nil)
-    end
-    it 'creates parent and child relationship' do
-      expect(patrick.parent.name).to eq("George")
-    end
-  end #describe parentage
 
 end #rspec

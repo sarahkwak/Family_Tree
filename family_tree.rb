@@ -75,16 +75,6 @@ module Tree
       grand_children
     end
 
-    def grand_children
-      grand_children = []
-      @children.each do |child|
-        child.children.each do |g_child|
-          grand_children << g_child
-        end
-      end
-      grand_children
-    end
-
   end #class ends
 
 end #module ends
@@ -202,6 +192,8 @@ def largest_grand_child_name(node)
   result = largest_grand_child(node)
   p result.name
 end
+
+
 # Drive Test goes here
 # p jill.grand_parent_name
 # no_siblings_name(nancy)
@@ -216,3 +208,4 @@ end
 # p george.siblings
 # p nancy.parent
 # p patrick
+patrick.grand_children.each {|child| p child.name }

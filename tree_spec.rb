@@ -36,6 +36,7 @@ RSpec.describe Tree do
     it 'to create the instance variable, it must have name' do
       expect{ sarah = Tree::Family.new }.to raise_error(ArgumentError)
     end
+
     let(:sarah) {Tree::Family.new("Sarah")}
     it 'must have name attribute' do
       expect(sarah).to have_attributes(:name => "Sarah")
@@ -47,6 +48,19 @@ RSpec.describe Tree do
       expect(sarah.children.size).to eq(0)
     end
   end #describe initialize
+
+  describe '#add' do
+    it 'should raise error if no argument passed' do
+      expect{carl.add}.to raise_error(ArgumentError)
+    end
+
+    let(:brian) {Tree::Family.new("Brian")}
+    let(:ryan) {Tree::Family.new("Ryan")}
+    it 'should add children to the parent node' do
+      ryan.add(brian)
+      change{ryan.children.count}.from(0).to(1)
+    end
+  end #describe add
 
   describe '#grand_parent_name' do
     it "should have at least one argument" do

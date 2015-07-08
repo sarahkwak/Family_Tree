@@ -18,33 +18,34 @@ RSpec.describe Tree do
     mary = Tree::Family.new("Mary")
 
     # build relationship
-    nancy.add(adam)
-    nancy.add(jill)
-    nancy.add(carl)
-    jill.add(kevin)
-    carl.add(catherine)
-    carl.add(joseph)
-    kevin.add(samuel)
-    kevin.add(george)
-    kevin.add(james)
-    kevin.add(aaron)
-    george.add(patrick)
-    george.add(robert)
-    james.add(mary)
+    nancy.add(nancy, adam)
+    nancy.add(nancy, jill)
+    nancy.add(nancy, carl)
+    nancy.add(jill, kevin)
+    nancy.add(carl, catherine)
+    nancy.add(carl, joseph)
+    nancy.add(kevin, samuel)
+    nancy.add(kevin, george)
+    nancy.add(kevin, james)
+    nancy.add(kevin, aaron)
+    nancy.add(george, patrick)
+    nancy.add(george, robert)
+    nancy.add(james, mary)
+
 
   describe '#initialize' do
-    it 'to create the instance variable, it must have name' do
+    it 'should have name' do
       expect{ sarah = Tree::Family.new }.to raise_error(ArgumentError)
     end
 
     let(:sarah) {Tree::Family.new("Sarah")}
-    it 'must have name attribute' do
+    it 'should have name attribute' do
       expect(sarah).to have_attributes(:name => "Sarah")
     end
-    it 'once instance variable sets, it has a children attribute' do
+    it 'should have a children attribute' do
       expect(sarah).to have_attributes(:children => [])
     end
-    it 'until children added to the variable, the children array will be empty' do
+    it 'should be empty until children added to the variable' do
       expect(sarah.children.size).to eq(0)
     end
   end #describe initialize
@@ -75,8 +76,15 @@ RSpec.describe Tree do
     let(:brian) {Tree::Family.new("Brian")}
     let(:ryan) {Tree::Family.new("Ryan")}
     it 'should add children to the parent node' do
-      ryan.add(brian)
+      nancy.add(ryan, brian)
       change{ryan.children.count}.from(0).to(1)
+    end
+      let(:joe) {Tree::Family.new("Ryan")}
+    it 'raises error if the node name is already in the tree' do
+      expect{ ryan.add(ryan, joe) }.to raise_error(ArgumentError)
+    end
+    it 'raises error when the node added to non-root node' do
+      expect{ patrick.add(nancy, ryan) }.to raise_error(ArgumentError)
     end
   end #describe add
 
@@ -111,7 +119,7 @@ RSpec.describe Tree do
     it 'should return grand children of the node' do
       expect(nancy.grand_children.size).to eq(3)
     end
-    it "shouldn't return anything if node has no grandchild" do
+    it "should NOT return anything if node has no grandchild" do
       expect(patrick.grand_children.size).to eq(0)
     end
   end #describe grand children
@@ -126,7 +134,7 @@ RSpec.describe Tree do
     it 'should include leaf node' do
       expect(no_children(nancy)).to include(adam)
     end
-    it 'all people in this list has no children' do
+    it 'should indicates that people in the list have no child' do
       expect(no_children(nancy)[0].children.count).to eq(0)
     end
   end #describe no children
@@ -138,16 +146,16 @@ RSpec.describe Tree do
     it 'should return person with most grandchildren' do
       expect(largest_grand_child(nancy)).to eq(jill)
     end
-    it 'this person will have 4 grandchildren' do
+    it 'should have 4 grandchildren' do
       expect(largest_grand_child(nancy).grand_children.count).to eq(4)
     end
-    it 'leaf node should never be in this list' do
+    it 'should not include root node in this list' do
       expect(largest_grand_child(nancy)).not_to eq(adam)
     end
   end #describe largest grand child
 
   describe '#siblings' do
-    it 'root node does not have any sibling' do
+    it 'should include root node' do
       expect(nancy.siblings).to eq(0)
     end
     it 'should return names of the siblings' do
@@ -169,10 +177,10 @@ RSpec.describe Tree do
 
   describe '#search' do
     it 'should return node object, when attribute name passed' do
-      expect(search(nancy, "Patrick")).to eq(patrick)
+      expect(nancy.search("Patrick")).to eq(patrick)
     end
-    it 'if the first argument is not the root node, it may not find the object' do
-      expect(search(patrick, "Kevin")).to eq(nil)
+    it 'may not find the object if the first argument is not the root node' do
+      expect(patrick.search("Kevin")).to eq(nil)
     end
   end #describe search
 

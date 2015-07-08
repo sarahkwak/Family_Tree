@@ -8,11 +8,11 @@ module Tree
       @children = []
     end
 
-    # def root
-    #   root = self
-    #   root = root.parent while !root.is_root?
-    #   root
-    # end
+    def root
+      root = self
+      root = root.parent while !root.is_root?
+      root
+    end
 
     def is_root?
       @parent == nil
@@ -33,9 +33,26 @@ module Tree
       add(child)
     end
 
-    def add(child)
-      child.parent =self
-      @children.push(child)
+    # General Tree seach function
+    def search(name)
+      if @name == name
+        return self
+      end
+      @children.each do |child|
+        # p child
+        result = child.search(name)
+        if result != nil
+          return result
+        end
+      end
+      return nil
+    end
+
+    def add(father, child)
+      raise ArgumentError, "Node must be added to the root" if ! is_root?
+      raise ArgumentError, "The name #{child.name} is already in the tree. To have better search result, you must provide uniq name" if search(child.name) != nil
+      child.parent =father
+      father.children.push(child)
     end
 
     def grand_parent_name
@@ -95,22 +112,23 @@ aaron = Tree::Family.new("Aaron")
 patrick = Tree::Family.new("Patrick")
 robert = Tree::Family.new("Robert")
 mary = Tree::Family.new("Mary")
+# julia = Tree::Family.new("Mary")
 
 # build relationship
 
-nancy.add(adam)
-nancy.add(jill)
-nancy.add(carl)
-jill.add(kevin)
-carl.add(catherine)
-carl.add(joseph)
-kevin.add(samuel)
-kevin.add(george)
-kevin.add(james)
-kevin.add(aaron)
-george.add(patrick)
-george.add(robert)
-james.add(mary)
+nancy.add(nancy, adam)
+nancy.add(nancy, jill)
+nancy.add(nancy, carl)
+nancy.add(jill, kevin)
+nancy.add(carl, catherine)
+nancy.add(carl, joseph)
+nancy.add(kevin, samuel)
+nancy.add(kevin, george)
+nancy.add(kevin, james)
+nancy.add(kevin, aaron)
+nancy.add(george, patrick)
+nancy.add(george, robert)
+nancy.add(james, mary)
 
 # No Sibling function (will return node)
 def no_siblings(node, result=[])
@@ -157,19 +175,7 @@ def no_children_name(node)
   result.each { |person| p person.name }
 end
 
-# General Tree seach function
-def search(node, name)
-  if node.name == name
-    return node
-  end
-  node.children.each do |child|
-    result = search(child, name)
-    if result != nil
-      return result
-    end
-  end
-  return nil
-end
+
 
 # Largest Grand Children function (will return node)
 def largest_grand_child(node, winner= nil)
@@ -209,4 +215,7 @@ end
 # p nancy.parent
 # p patrick
 # patrick.grand_children.each {|child| p child.name }
-# p search(nancy, "Patrick")
+# p patrick.parent
+# p nancy.search("Nancy")
+# james.children.each { |c| p c.name}
+# p nancy.search("jilian")

@@ -43,3 +43,10 @@ kevin << aaron
 george << patrick
 george << robert
 james << mary
+
+FAMILY = []
+root_node.each { |node| FAMILY << node }
+
+def grandparent(child)
+  child.parent.parent.name
+end

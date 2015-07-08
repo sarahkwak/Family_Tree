@@ -22,4 +22,13 @@ RSpec.describe Tree do
     end
   end #describe no siblings
 
+  describe 'no_children' do
+    it 'returns name of people without children' do
+      expect(no_children.count).to eq(8)
+    end
+    it 'returns name of people without children' do
+      expect(no_children[0].has_children?).to eq(false)
+    end
+  end #describe no children
+
 end

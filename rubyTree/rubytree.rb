@@ -62,3 +62,15 @@ def no_siblings_name
   end
     only_child.each { |individual| p individual.name }
 end
+
+def no_children
+  no_child = []
+  i = 0
+  while i < FAMILY.size
+    if FAMILY[i].has_children? == false
+      no_child << FAMILY[i]
+    end
+    i+=1
+  end
+  no_child.each { |individual| p individual.name }
+end

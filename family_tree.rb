@@ -1,7 +1,8 @@
 module Tree
 
   class Family
-    attr :name, :children, :parent
+    attr :name, :children
+    attr_accessor :parent
     def initialize(name)
       @name = name
       # @child_hash = Hash.new
@@ -18,9 +19,9 @@ module Tree
       @parent == nil
     end
 
-    def parent=(parent)
-      @parent = parent
-    end
+    # def parent=parent
+    #   @parent=parent
+    # end
 
     def parentage
       return nil if is_root?
@@ -51,7 +52,7 @@ module Tree
     def add(father, child)
       raise ArgumentError, "Node must be added to the root" if ! is_root?
       raise ArgumentError, "The name #{child.name} is already in the tree. To have better search result, you must provide uniq name" if search(child.name) != nil
-      child.parent =father
+      child.parent = father
       father.children.push(child)
     end
 
@@ -199,8 +200,9 @@ def largest_grand_child_name(node)
   p result.name
 end
 
-
 # Drive Test goes here
+# p nancy
+# p nancy.parent
 # p jill.grand_parent_name
 # no_siblings_name(nancy)
 # nancy.grand_parent_name

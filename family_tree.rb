@@ -199,25 +199,3 @@ def largest_grand_child_name(node)
   result = largest_grand_child(node)
   p result.name
 end
-
-# Drive Test goes here
-# p nancy
-# p nancy.parent
-# p jill.grand_parent_name
-# no_siblings_name(nancy)
-# nancy.grand_parent_name
-# no_children_name(nancy)
-# no_children_name(nancy)
-# largest_grand_child_name(kevin)
-# p jill.grand_children.count
-# robert.parent.children.each { |child| p child.name}
-# p nancy.is_root?
-# joseph.siblings
-# p george.siblings
-# p nancy.parent
-# p patrick
-# patrick.grand_children.each {|child| p child.name }
-# p patrick.parent
-# p nancy.search("Nancy")
-# james.children.each { |c| p c.name}
-# p nancy.search("jilian")
